@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extended Form with Data Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 350px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .hobbies {
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #displayData {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <form id="myForm">
+        <h1>Registration</h1>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" placeholder="Your email">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter the password">
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" placeholder="Your address"></textarea>
+
+        <label for="feedback">Feedback:</label>
+        <input type="text" id="feedback" name="feedback" placeholder="Type your feedback">
+
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div class="hobbies">
+            <label>Hobbies:</label>
+            <input type="checkbox" name="hobby" value="Reading"> Reading
+            <input type="checkbox" name="hobby" value="Music"> Music
+            <input type="checkbox" name="hobby" value="Sports"> Sports
+            <input type="checkbox" name="hobby" value="Travel"> Travel
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="displayData" style="display: none;">
+        <h2>Submitted Data:</h2>
+        <p><strong>Email:</strong> <span id="showEmail"></span></p>
+        <p><strong>Password:</strong> <span id="showPassword"></span></p>
+        <p><strong>Phone Number:</strong> <span id="showPhone"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="showDOB"></span></p>
+        <p><strong>Address:</strong> <span id="showAddress"></span></p>
+        <p><strong>Feedback:</strong> <span id="showFeedback"></span></p>
+        <p><strong>Gender:</strong> <span id="showGender"></span></p>
+        <p><strong>Hobbies:</strong> <span id="showHobbies"></span></p>
+    </div>
+
+    <script>
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            document.getElementById("showEmail").textContent = document.getElementById("email").value;
+            document.getElementById("showPassword").textContent = document.getElementById("password").value;
+            document.getElementById("showPhone").textContent = document.getElementById("phone").value;
+            document.getElementById("showDOB").textContent = document.getElementById("dob").value;
+            document.getElementById("showAddress").textContent = document.getElementById("address").value;
+            document.getElementById("showFeedback").textContent = document.getElementById("feedback").value;
+            document.getElementById("showGender").textContent = document.getElementById("gender").value;
+
+            // Collect hobbies
+            const hobbies = document.querySelectorAll('input[name="hobby"]:checked');
+            let hobbyList = [];
+            hobbies.forEach((hobby) => {
+                hobbyList.push(hobby.value);
+            });
+            document.getElementById("showHobbies").textContent = hobbyList.join(", ");
+
+            document.getElementById("displayData").style.display = "block";
+        });
+    </script>
+
+</body>
+</html>
